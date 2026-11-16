@@ -1,0 +1,32 @@
+name: Sample release evidence
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test
+        run: python -m unittest discover -s tests -v
+      - name: Record completed test and create bundle
+        run: |
+          mkdir -p handover
+          cp -R examples/release handover/release
+          printf '[{"name":"unit tests","status":"passed"}]\n' > handover/checks.json
+          python -m release_evidence create handover/release --version "sample-${GITHUB_SHA}" --checks handover/checks.json --output handover/manifest.json > handover/manifest-digest.json
+          python -m release_evidence verify handover/release --manifest handover/manifest.json
+          cp -R release_evidence handover/release_evidence
+          cp README.md handover/README.md
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sample-release-evidence
+          path: handover/
+          retention-days: 7

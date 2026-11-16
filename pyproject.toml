@@ -1,0 +1,12 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+[project]
+name = "release-evidence"
+version = "0.1.0"
+description = "Offline file-integrity evidence for small-team software handovers"
+requires-python = ">=3.10"
+[project.scripts]
+release-evidence = "release_evidence.cli:main"
+[tool.setuptools.packages.find]
+include = ["release_evidence*"]
