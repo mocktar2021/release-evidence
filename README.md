@@ -83,9 +83,13 @@ symlinks, duplicate JSON keys/file records, invalid inputs and binary/Unicode ne
 ## Next steps
 
 - Have another maintainer follow the instructions from a fresh checkout.
-- Test the workflow in the target GitHub repository.
+- Keep the hosted workflow and supported action versions tested.
 - Evaluate signed manifests and a durable trusted distribution channel.
 - Pilot with nonprofit maintainers before claiming usability or adoption.
 
-License selection and public release are pending the owner's approval. Do not treat this private prototype
-as already open-source licensed.
+## License
+
+MIT License. Copyright (c) 2026 Mocktar Tairou. See [LICENSE](LICENSE).
+
+The source in this repository was developed for this project; no third-party source is vendored.
+Python, setuptools and the referenced GitHub Actions retain their respective licenses.
